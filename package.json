@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Cambara/survey_api/issues"
   },
-  "homepage": "https://github.com/Cambara/survey_api#readme"
+  "homepage": "https://github.com/Cambara/survey_api#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.0.0",
+    "i": "^0.3.6",
+    "npm": "^6.14.10"
+  }
 }
