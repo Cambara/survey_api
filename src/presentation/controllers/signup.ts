@@ -1,5 +1,7 @@
+import { HttpRequest, HttpResponse } from '../protocols/http'
+
 export class SignupController {
-  handle (httpRequest: any): any {
+  handle (httpRequest: HttpRequest): HttpResponse {
     let msg
 
     if (!httpRequest.body.name) msg = 'Missing param: name'
@@ -7,7 +9,8 @@ export class SignupController {
 
     if (!msg) {
       return {
-        statusCode: 200
+        statusCode: 200,
+        body: {}
       }
     }
 
