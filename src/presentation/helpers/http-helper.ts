@@ -1,4 +1,4 @@
-import { ServerError } from '../protocols/errors/server-error'
+import { ServerError } from '../protocols/errors'
 import { HttpResponse } from '../protocols/http'
 
 export const successRequest = (body:any):HttpResponse => ({
