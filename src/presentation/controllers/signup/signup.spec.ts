@@ -40,7 +40,7 @@ const makeSut = (): MakeSutTypes => {
   return { sut, emailValidatorStub, addAccountStub }
 }
 
-describe('SignUp Controller', async () => {
+describe('SignUp Controller', () => {
   test('Should return 400 if no name is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -139,7 +139,7 @@ describe('SignUp Controller', async () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
@@ -172,12 +172,28 @@ describe('SignUp Controller', async () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@mail.com',
       password: 'any_pass'
     })
+  })
+
+  test('Should return 500 if AddAccount throws', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(():Promise<AccountModel> => new Promise((resolve, reject) => reject(new Error())))
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_pass',
+        passwordConfirmation: 'any_pass'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 
   test('Should return 200 if values are corrects', async () => {
