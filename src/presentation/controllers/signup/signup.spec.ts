@@ -1,5 +1,5 @@
-import { AccountModel } from '../../domain/models/account'
-import { AddAccount, AddAccountModel } from '../../domain/usercases/add-account'
+import { AccountModel } from '../../../domain/models/account'
+import { AddAccount, AddAccountModel } from '../../../domain/usercases/add-account'
 import { InvalidParamError, MissingParamError, ServerError, EmailValidator } from './signup-protocols'
 import { SignupController } from './signup'
 
