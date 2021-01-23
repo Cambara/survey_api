@@ -1,5 +1,4 @@
 import { Collection, MongoClient } from 'mongodb'
-import { disconnect } from 'process'
 
 export const MongoHelper = {
   client: null as MongoClient,
